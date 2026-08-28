@@ -46,11 +46,12 @@
       '</div>' +
       '<div class="auth-container">' +
         '<div class="auth-top-capsule">' +
-          '<span class="auth-capsule-logo">' + logoSvg() + '</span>' +
-          '<div class="auth-capsule-text">' +
-            '<b>' + siteName + '</b>' +
-            '<span>' + esc(a("brand") || "Creative Academy") + '</span>' +
+          '<div class="auth-capsule-brand">' +
+            '<span class="auth-capsule-logo">' + logoSvg() + '</span>' +
+            '<b class="auth-capsule-name">' + siteName + '</b>' +
           '</div>' +
+          '<span class="auth-capsule-divider"></span>' +
+          '<span class="auth-capsule-tag"><i class="badge-dot"></i> ' + esc(a("brand") || "باشقۇرۇش سۇپىسى") + '</span>' +
         '</div>' +
         '<div class="auth-card-frame">' +
           '<form class="auth-card" id="loginForm" novalidate>' +
