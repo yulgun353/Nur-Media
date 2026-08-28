@@ -123,7 +123,13 @@
     return '<a class="skip" href="#main">' + esc(t("a11y.skip")) + "</a>" +
       '<header class="hdr" id="hdr"><div class="wrap hdr-in">' +
       logo(false) +
-      '<nav class="nav" id="nav" aria-label="Main"><ul>' + links + "</ul></nav>" +
+      '<nav class="nav" id="nav" aria-label="Main">' +
+      '<div class="nav-drawer-h">' + logo(false) + '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button></div>' +
+      '<ul>' + links + "</ul>" +
+      '<div class="nav-drawer-f">' +
+      '<a class="btn btn-primary btn-block" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + '</a>' +
+      '</div>' +
+      "</nav>" +
       '<div class="hdr-act">' + modeBtn() + themeBtn() + langSwitch() +
       '<a class="btn btn-primary btn-sm hdr-cta" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + "</a>" +
       '<button type="button" class="burger" id="burger" aria-label="' + esc(t("a11y.openMenu")) + '" aria-expanded="false" aria-controls="nav">' +
@@ -190,16 +196,20 @@
 
   function wireNav() {
     var b = document.getElementById("burger"), nav = document.getElementById("nav"),
-        sc = document.getElementById("navscrim"), hdr = document.getElementById("hdr");
+        sc = document.getElementById("navscrim"), hdr = document.getElementById("hdr"),
+        nc = document.getElementById("navClose");
     function set(open) {
       if (!nav) return;
       nav.classList.toggle("is-open", open);
       if (sc) sc.hidden = !open;
-      b.setAttribute("aria-expanded", String(open));
-      b.setAttribute("aria-label", t(open ? "a11y.closeMenu" : "a11y.openMenu"));
+      if (b) {
+        b.setAttribute("aria-expanded", String(open));
+        b.setAttribute("aria-label", t(open ? "a11y.closeMenu" : "a11y.openMenu"));
+      }
       document.body.classList.toggle("no-scroll", open);
     }
-    if (b) b.addEventListener("click", function () { set(!nav.classList.contains("is-open")); });
+    if (b) b.addEventListener("click", function (e) { e.preventDefault(); set(!nav.classList.contains("is-open")); });
+    if (nc) nc.addEventListener("click", function (e) { e.preventDefault(); set(false); });
     if (sc) sc.addEventListener("click", function () { set(false); });
     if (nav) nav.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
