@@ -122,7 +122,14 @@
       { key: "blog", file: "blog.html", ic: "doc" },
       { key: "contact", file: "contact.html", ic: "phone" }
     ];
-    var links = nav.map(function (item) {
+    var desktopLinks = nav.map(function (item) {
+      var isCur = active === item.key;
+      return '<li><a href="' + N.href(item.file) + '"' + (isCur ? ' class="is-on" aria-current="page"' : "") + ">" +
+        esc(t("nav." + item.key)) +
+        "</a></li>";
+    }).join("");
+
+    var drawerLinks = nav.map(function (item) {
       var isCur = active === item.key;
       return '<li><a href="' + N.href(item.file) + '"' + (isCur ? ' class="is-on" aria-current="page"' : "") + ">" +
         icon(item.ic, 18, "nav-link-ic") +
@@ -134,21 +141,22 @@
     return '<a class="skip" href="#main">' + esc(t("a11y.skip")) + "</a>" +
       '<header class="hdr" id="hdr"><div class="wrap hdr-in">' +
       logo(false) +
-      '<nav class="nav" id="nav" aria-label="Main">' +
-      '<div class="nav-drawer-h">' +
-        logo(false) +
-        '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button>' +
-      '</div>' +
-      '<ul class="nav-links">' + links + "</ul>" +
-      '<div class="nav-drawer-f">' +
-        '<a class="btn btn-primary btn-block" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + '</a>' +
-      '</div>' +
-      "</nav>" +
+      '<nav class="nav-desktop" aria-label="Main"><ul>' + desktopLinks + "</ul></nav>" +
       '<div class="hdr-act">' + modeBtn() + themeBtn() + langSwitch() +
       '<a class="btn btn-primary btn-sm hdr-cta" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + "</a>" +
       '<button type="button" class="burger" id="burger" aria-label="' + esc(t("a11y.openMenu")) + '" aria-expanded="false" aria-controls="nav">' +
       '<span></span><span></span><span></span></button>' +
       "</div></div></header>" +
+      '<nav class="nav-drawer" id="nav" aria-label="Mobile Navigation">' +
+      '<div class="nav-drawer-h">' +
+        logo(false) +
+        '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button>' +
+      '</div>' +
+      '<ul class="nav-drawer-links">' + drawerLinks + "</ul>" +
+      '<div class="nav-drawer-f">' +
+        '<a class="btn btn-primary btn-block" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + '</a>' +
+      '</div>' +
+      "</nav>" +
       '<div class="navscrim" id="navscrim" hidden></div>';
   }
 

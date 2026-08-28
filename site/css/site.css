@@ -128,25 +128,25 @@ html[lang="ug"] .logo,html[lang="ar"] .logo{font-size:var(--fs-lg);line-height:1
 .logo-text{background:linear-gradient(135deg,#FFFFFF 30%,#00F0FF 80%,#38BDF8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;white-space:nowrap}
 .ftr .logo-text{color:#FFFFFF;background:none;-webkit-background-clip:unset}
 
-.nav{margin-inline-start:auto;position:relative;z-index:1}
-.nav ul{display:flex;align-items:center;gap:.35rem}
-.nav a{
+.nav-desktop{margin-inline-start:auto;position:relative;z-index:1}
+.nav-desktop ul{display:flex;align-items:center;gap:.35rem;list-style:none;margin:0;padding:0}
+.nav-desktop a{
   display:inline-block;padding:.48rem .9rem;border-radius:var(--r-pill);
   font-size:var(--fs-sm);font-weight:600;color:#CBD5E1;transition:.2s var(--ease);
-  border:1px solid transparent;background:rgba(15,29,54,.4);
+  border:1px solid transparent;background:rgba(15,29,54,.4);text-decoration:none;
 }
-.nav a:hover{
+.nav-desktop a:hover{
   color:#00F0FF;background:rgba(0,229,255,.12);border-color:rgba(0,229,255,.25);
   box-shadow:0 0 15px rgba(0,229,255,.15);
 }
-.nav a.is-on{
+.nav-desktop a.is-on{
   color:#050B16;
   background:linear-gradient(135deg,#00F0FF,#0072FF);
   box-shadow:0 4px 18px rgba(0,229,255,.45);
   border-color:transparent;font-weight:800;
 }
 .hdr-act{display:flex;align-items:center;gap:.65rem;margin-inline-start:auto;position:relative;z-index:1}
-.nav + .hdr-act{margin-inline-start:0}
+.nav-desktop + .hdr-act{margin-inline-start:0}
 
 /* ---------- Mode (Day/Night) & Theme (4 Colors) 1-Click Buttons ---------- */
 .mode-btn, .theme-btn{
@@ -857,9 +857,8 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
 [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 [data-reveal].is-in{opacity:1;transform:none}
 .no-scroll{overflow:hidden}
-/* Desktop drawer header/footer & link icons hidden */
-.nav-drawer-h, .nav-drawer-f{display:none}
-.nav .nav-link-ic, .nav .nav-link-chk{display:none}
+/* Desktop: hide mobile drawer and link icons */
+.nav-drawer{display:none}
 
 /* ---------- responsive ---------- */
 @media (max-width:1024px){
@@ -894,6 +893,9 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
   .mode-btn, .theme-btn{width:34px;height:34px}
   .langsw-btn{padding:0.35rem 0.55rem;font-size:0.75rem}
 
+  /* Desktop nav hidden on mobile */
+  .nav-desktop{display:none !important}
+
   /* Burger button on the far RIGHT edge */
   .burger{
     display:inline-flex;
@@ -915,40 +917,9 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
     margin-inline-end:auto;
   }
 
-  /* Drawer header/footer shown on mobile */
-  .nav-drawer-h{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding-bottom:1rem;
-    margin-bottom:1.2rem;
-    border-bottom:1px solid rgba(0,229,255,.16);
-  }
-  .nav-close{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:36px;
-    height:36px;
-    border-radius:10px;
-    background:rgba(15,29,54,.8);
-    border:1px solid rgba(0,229,255,.25);
-    color:#00F0FF;
-    cursor:pointer;
-    transition:.2s;
-  }
-  .nav-close:hover{
-    background:rgba(0,229,255,.2);
-    color:#FFFFFF;
-  }
-  .nav-drawer-f{
-    display:block;
-    margin-top:auto;
-    padding-top:1.5rem;
-  }
-
   /* Nav Drawer: Slides in from the physical RIGHT side */
-  .nav{
+  .nav-drawer{
+    display:flex !important;
     position:fixed !important;
     top:0 !important;
     right:0 !important;
@@ -957,33 +928,53 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
     width:min(320px, 86vw) !important;
     height:100dvh !important;
     background:linear-gradient(180deg,#091224 0%,#0F1D38 100%) !important;
-    border-left:1px solid rgba(0,229,255,.25) !important;
+    border-left:1px solid rgba(0,229,255,.28) !important;
     border-right:0 !important;
     padding:1.4rem 1.25rem 2rem !important;
-    display:flex !important;
     flex-direction:column !important;
     transform:translateX(100%) !important;
     visibility:hidden !important;
     pointer-events:none !important;
     transition:transform .32s cubic-bezier(.22,.61,.36,1), visibility .32s cubic-bezier(.22,.61,.36,1) !important;
-    box-shadow:-20px 0 60px rgba(0,0,0,.9) !important;
-    z-index:1000 !important;
+    box-shadow:-20px 0 60px rgba(0,0,0,.95) !important;
+    z-index:99999 !important;
     overflow-y:auto !important;
   }
-  html[dir="rtl"] .nav{
-    right:0 !important;
-    left:auto !important;
-    border-left:1px solid rgba(0,229,255,.25) !important;
-    border-right:0 !important;
-    transform:translateX(100%) !important;
-    box-shadow:-20px 0 60px rgba(0,0,0,.9) !important;
-  }
-  .nav.is-open{
+  .nav-drawer.is-open{
     transform:translateX(0) !important;
     visibility:visible !important;
     pointer-events:auto !important;
   }
-  .nav ul{
+
+  /* Drawer Header */
+  .nav-drawer-h{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    padding-bottom:1rem !important;
+    margin-bottom:1.2rem !important;
+    border-bottom:1px solid rgba(0,229,255,.16) !important;
+  }
+  .nav-close{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:38px !important;
+    height:38px !important;
+    border-radius:10px !important;
+    background:rgba(15,29,54,.85) !important;
+    border:1px solid rgba(0,229,255,.25) !important;
+    color:#00F0FF !important;
+    cursor:pointer !important;
+    transition:.2s !important;
+  }
+  .nav-close:hover{
+    background:rgba(0,229,255,.2) !important;
+    color:#FFFFFF !important;
+  }
+
+  /* Drawer Navigation Links */
+  .nav-drawer-links{
     display:flex !important;
     flex-direction:column !important;
     align-items:stretch !important;
@@ -992,13 +983,13 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
     margin:0 !important;
     padding:0 !important;
   }
-  .nav li{
+  .nav-drawer-links li{
     display:block !important;
     width:100% !important;
     margin:0 !important;
     padding:0 !important;
   }
-  .nav a{
+  .nav-drawer-links a{
     display:flex !important;
     align-items:center !important;
     gap:0.75rem !important;
@@ -1008,39 +999,47 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
     border-radius:12px !important;
     text-align:start !important;
     color:#F1F5F9 !important;
-    background:rgba(15,29,54,.75) !important;
+    background:rgba(15,29,54,.85) !important;
     border:1px solid rgba(0,229,255,.18) !important;
-    box-shadow:0 4px 12px rgba(0,0,0,.2) !important;
+    box-shadow:0 4px 12px rgba(0,0,0,.25) !important;
+    text-decoration:none !important;
     transition:.2s var(--ease) !important;
   }
-  .nav a:hover{
+  .nav-drawer-links a:hover{
     background:rgba(0,229,255,.15) !important;
     border-color:rgba(0,229,255,.45) !important;
     color:#00F0FF !important;
   }
-  .nav a.is-on{
+  .nav-drawer-links a.is-on{
     background:linear-gradient(135deg,#00F0FF,#0072FF) !important;
     color:#050B16 !important;
     border-color:transparent !important;
     box-shadow:0 6px 20px rgba(0,229,255,.4) !important;
   }
-  .nav .nav-link-ic{
+  .nav-drawer-links .nav-link-ic{
     display:inline-flex !important;
     color:currentColor !important;
     flex:none !important;
   }
-  .nav .nav-link-chk{
+  .nav-drawer-links .nav-link-chk{
     display:inline-flex !important;
     margin-inline-start:auto !important;
     color:currentColor !important;
     flex:none !important;
   }
-  .nav .nav-link-txt{
+  .nav-drawer-links .nav-link-txt{
     flex:1 !important;
   }
 
+  /* Drawer Footer */
+  .nav-drawer-f{
+    display:block !important;
+    margin-top:auto !important;
+    padding-top:1.5rem !important;
+  }
+
   /* Light mode drawer */
-  html[data-mode="light"] .nav{
+  html[data-mode="light"] .nav-drawer{
     background:linear-gradient(180deg,#FFFDF9 0%,#F5EFE6 100%) !important;
     border-left:1px solid rgba(215,190,170,.6) !important;
     box-shadow:-20px 0 60px rgba(170,140,120,.25) !important;
@@ -1053,29 +1052,29 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
     border-color:rgba(200,170,150,.5) !important;
     color:#2C2227 !important;
   }
-  html[data-mode="light"] .nav a{
+  html[data-mode="light"] .nav-drawer-links a{
     background:#FFFFFF !important;
     color:#2C2227 !important;
     border-color:rgba(215,190,170,.5) !important;
     box-shadow:0 3px 10px rgba(170,140,120,.08) !important;
   }
-  html[data-mode="light"] .nav a:hover{
+  html[data-mode="light"] .nav-drawer-links a:hover{
     background:#FAF5EE !important;
     color:var(--c-theme,#0284C7) !important;
     border-color:var(--c-theme,#0284C7) !important;
   }
-  html[data-mode="light"] .nav a.is-on{
+  html[data-mode="light"] .nav-drawer-links a.is-on{
     background:var(--g-brand) !important;
     color:#FFFFFF !important;
   }
 
   .navscrim{
-    position:fixed;
-    inset:0;
-    background:rgba(3,7,18,.8);
-    z-index:999;
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
+    position:fixed !important;
+    inset:0 !important;
+    background:rgba(3,7,18,.8) !important;
+    z-index:99998 !important;
+    backdrop-filter:blur(8px) !important;
+    -webkit-backdrop-filter:blur(8px) !important;
   }
 
   .f-row{grid-template-columns:1fr}
