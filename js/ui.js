@@ -150,7 +150,10 @@
       '<nav class="nav-drawer" id="nav" aria-label="Mobile Navigation">' +
       '<div class="nav-drawer-h">' +
         logo(false) +
-        '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button>' +
+        '<div class="nav-drawer-h-r">' +
+          '<a class="nav-admin-link" href="' + N.href("admin.html") + '">' + icon("layers", 15) + "<span>" + esc(t("footer.admin")) + "</span></a>" +
+          '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button>' +
+        '</div>' +
       '</div>' +
       '<ul class="nav-drawer-links">' + drawerLinks + "</ul>" +
       '<div class="nav-drawer-f">' +
@@ -179,7 +182,11 @@
 
     return '<footer class="ftr"><div class="ftr-glow" aria-hidden="true"></div><div class="wrap">' +
       '<div class="ftr-grid">' +
-        '<div class="ftr-col ftr-brand">' + logo(true) +
+        '<div class="ftr-col ftr-brand">' +
+          '<div class="ftr-brand-row">' +
+            logo(true) +
+            '<a class="ftr-admin-badge" href="' + N.href("admin.html") + '">' + icon("layers", 14) + "<span>" + esc(t("footer.admin")) + "</span></a>" +
+          '</div>' +
           "<p>" + esc(t("footer.about")) + "</p>" +
           '<div class="ftr-soc">' + soc + "</div></div>" +
         '<div class="ftr-col"><h4>' + esc(t("footer.quick")) + "</h4><ul>" + quick + "</ul></div>" +
@@ -198,9 +205,12 @@
           "</ul>" +
         "</div>" +
       "</div>" +
-      '<div class="ftr-bar"><p>&copy; ' + new Date().getFullYear() + " " + esc(T(s.name)) + ". " + esc(t("footer.rights")) + "</p>" +
-        '<div class="ftr-bar-r"><span>' + esc(t("footer.made")) + "</span>" +
-        '<a class="ftr-admin" href="' + N.href("admin.html") + '">' + icon("layers", 15) + esc(t("footer.admin")) + "</a></div>" +
+      '<div class="ftr-bar">' +
+        '<div class="ftr-bar-left">' +
+          '<a class="ftr-admin" href="' + N.href("admin.html") + '">' + icon("layers", 15) + esc(t("footer.admin")) + "</a>" +
+          '<span>' + esc(t("footer.made")) + "</span>" +
+        "</div>" +
+        '<p>&copy; ' + new Date().getFullYear() + " " + esc(T(s.name)) + ". " + esc(t("footer.rights")) + "</p>" +
       "</div></div></footer>";
   }
 

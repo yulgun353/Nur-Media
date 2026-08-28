@@ -797,14 +797,36 @@ html[lang="ug"] .c-list span,html[lang="ar"] .c-list span{text-transform:none;le
 .ftr-contact{display:grid;gap:.65rem}
 .ftr-contact li{display:flex;align-items:flex-start;gap:.65rem;font-size:var(--fs-sm);color:#CBD5E1}
 .ftr-contact svg{flex:none;color:#00F0FF;margin-block-start:.25rem}
+.ftr-brand-row{display:flex;align-items:center;gap:.85rem;flex-wrap:wrap}
+.ftr-admin-badge{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.32rem .75rem;
+  border-radius:var(--r-pill,999px);background:rgba(0,229,255,.1);
+  border:1px solid rgba(0,229,255,.25);color:#00F0FF;font-size:var(--fs-xs);
+  font-weight:700;text-decoration:none;transition:.22s var(--ease);
+}
+.ftr-admin-badge:hover{
+  background:rgba(0,229,255,.22);color:#FFFFFF;border-color:#00F0FF;
+  box-shadow:0 0 15px rgba(0,229,255,.4);transform:translateY(-2px);
+}
 .ftr-bar{
   display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;align-items:center;
   border-block-start:1px solid rgba(0,229,255,.14);padding-block:1.4rem;font-size:var(--fs-xs);color:#94A3B8;
 }
 .ftr-bar p{margin:0}
-.ftr-bar-r{display:flex;align-items:center;gap:1.3rem}
-.ftr-admin{display:inline-flex;align-items:center;gap:.45rem;color:#00F0FF;font-weight:700;transition:.2s}
+.ftr-bar-left{display:flex;align-items:center;gap:1.3rem}
+.ftr-admin{display:inline-flex;align-items:center;gap:.45rem;color:#00F0FF;font-weight:700;transition:.2s;text-decoration:none}
 .ftr-admin:hover{color:#FFFFFF;text-shadow:0 0 10px rgba(0,229,255,.5)}
+.nav-drawer-h-r{display:flex;align-items:center;gap:.65rem}
+.nav-admin-link{
+  display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .65rem;
+  border-radius:var(--r-pill,999px);background:rgba(0,229,255,.12);
+  border:1px solid rgba(0,229,255,.25);color:#00F0FF;font-size:0.75rem;
+  font-weight:700;text-decoration:none;transition:.2s;
+}
+.nav-admin-link:hover{background:rgba(0,229,255,.25);color:#FFFFFF}
+html[data-mode="light"] .ftr-admin-badge{background:#FFFDF9;border-color:rgba(215,190,170,.6);color:#2C2227;box-shadow:0 2px 8px rgba(170,140,120,.12)}
+html[data-mode="light"] .ftr-admin-badge:hover{background:#FFFFFF;border-color:var(--c-theme,#0284C7);color:var(--c-theme,#0284C7)}
+html[data-mode="light"] .nav-admin-link{background:#FFFFFF;border-color:rgba(215,190,170,.6);color:#2C2227}
 
 /* ---------- modal ---------- */
 .modal{
