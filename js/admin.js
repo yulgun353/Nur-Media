@@ -46,11 +46,12 @@
       '</div>' +
       '<div class="auth-container">' +
         '<div class="auth-top-capsule">' +
-          '<span class="auth-capsule-logo">' + logoSvg() + '</span>' +
-          '<div class="auth-capsule-text">' +
-            '<b>' + siteName + '</b>' +
-            '<span>' + esc(a("brand") || "Creative Academy") + '</span>' +
+          '<div class="auth-capsule-brand">' +
+            '<span class="auth-capsule-logo">' + logoSvg() + '</span>' +
+            '<b class="auth-capsule-name">' + siteName + '</b>' +
           '</div>' +
+          '<span class="auth-capsule-divider"></span>' +
+          '<span class="auth-capsule-tag"><i class="badge-dot"></i> ' + esc(a("brand") || "باشقۇرۇش سۇپىسى") + '</span>' +
         '</div>' +
         '<div class="auth-card-frame">' +
           '<form class="auth-card" id="loginForm" novalidate>' +
@@ -260,8 +261,8 @@
         '<button type="button" class="burger2" id="burger2" aria-label="menu">' + icon("menu", 22) + "</button>" +
         "<h1 id=\"pageTitle\"></h1>" +
         '<div class="top-r">' + UI.modeBtn() + UI.themeBtn() + UI.langSwitch() +
-          '<a class="icon-btn" href="index.html?lang=' + L + '" target="_blank" rel="noopener">' + icon("eye", 15) + esc(a("nav.site")) + "</a>" +
-          '<button type="button" class="me me-btn" id="openPassModal" title="' + esc(a("security.title")) + '">' +
+          '<a class="icon-btn" href="index.html?lang=' + L + '" target="_blank" rel="noopener" aria-label="' + esc(a("nav.site")) + '">' + icon("eye", 18) + "</a>" +
+          '<button type="button" class="me me-btn" id="openPassModal" aria-label="' + esc(a("security.title")) + '">' +
             UI.avatar("AD", "#00F0FF", 36) +
             '<span class="me-txt"><b>Admin</b><i style="font-style:normal;color:var(--ink-3)">' + esc(N.getAuth().email) + '</i></span>' +
             '<span class="me-key" style="color:#00F0FF;display:inline-flex;padding:4px;border-radius:6px;background:rgba(0,229,255,.1)">' + icon("key", 14) + '</span>' +
