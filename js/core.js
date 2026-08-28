@@ -316,10 +316,11 @@
     return DEFAULT_CREDS;
   }
 
-  /* ---------- session (demo auth) ---------- */
-  function isAuthed() { return sGet(SESSION_KEY) === "1"; }
-  function login() { sSet(SESSION_KEY, "1"); }
-  function logout() { sDel(SESSION_KEY); }
+  /* ---------- session (in-memory per page session, never persisted) ---------- */
+  var sessionAuthed = false;
+  function isAuthed() { return sessionAuthed; }
+  function login() { sessionAuthed = true; }
+  function logout() { sessionAuthed = false; }
 
   window.NUR = {
     LANGS: LANGS, LANG_NAME: LANG_NAME, LANG_SHORT: LANG_SHORT,

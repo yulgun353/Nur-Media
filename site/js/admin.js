@@ -69,15 +69,15 @@
                 '<label for="authEmail">' + esc(a("login.email")) + '</label>' +
                 '<div class="auth-input-pill">' +
                   '<span class="auth-input-ic">' + icon("mail", 18) + '</span>' +
-                  '<input id="authEmail" name="email" type="email" value="' + esc(auth.email) + '" autocomplete="username" required placeholder="' + esc(a("login.email")) + '">' +
+                  '<input id="authEmail" name="email" type="email" value="" autocomplete="off" required placeholder="admin@nurmedia.co">' +
                 '</div>' +
               '</div>' +
               '<div class="auth-field">' +
                 '<label for="authPass">' + esc(a("login.pass")) + '</label>' +
                 '<div class="auth-input-pill">' +
                   '<span class="auth-input-ic">' + icon("lock", 18) + '</span>' +
-                  '<input id="authPass" name="pass" type="password" value="' + esc(auth.pass) + '" autocomplete="current-password" required placeholder="' + esc(a("login.pass")) + '">' +
-                  '<button type="button" class="auth-pass-toggle" id="togglePass" aria-label="Toggle password visibility" title="Toggle password">' +
+                  '<input id="authPass" name="pass" type="password" value="" autocomplete="new-password" required placeholder="••••••••">' +
+                  '<button type="button" class="auth-pass-toggle" id="togglePass" aria-label="Toggle password visibility">' +
                     '<span class="pass-show">' + icon("eye", 17) + '</span>' +
                     '<span class="pass-hide" hidden>' + icon("eyeOff", 17) + '</span>' +
                   '</button>' +
