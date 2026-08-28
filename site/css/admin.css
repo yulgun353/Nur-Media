@@ -563,9 +563,43 @@ html[lang="ug"] .side-grp,html[lang="ar"] .side-grp{text-transform:none;letter-s
 .side-nav .badge{margin-inline-start:auto;background:rgba(239,68,68,.9);color:#fff;font-size:10px;font-weight:700;
   border-radius:99px;padding:.1rem .4rem;min-width:19px;text-align:center}
 .side-nav a.is-on .badge{background:rgba(0,0,0,.3);color:#FFFFFF}
-.side-foot{padding:.9rem;border-block-start:1px solid rgba(0,229,255,.14);display:grid;gap:.4rem}
-.side-foot a{font-size:var(--fs-xs);color:#94A3B8}
-.side-foot a:hover{color:#00F0FF}
+.side-foot{
+  padding:.9rem 1rem;
+  border-block-start:1px solid rgba(0,229,255,.14);
+  display:grid;
+  gap:.45rem;
+}
+.side-foot a{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:.75rem;
+  padding:.65rem .85rem;
+  border-radius:10px;
+  font-size:var(--fs-sm);
+  font-weight:600;
+  color:#94A3B8;
+  text-decoration:none;
+  transition:.2s var(--ease);
+  background:rgba(15,29,54,.35);
+  border:1px solid transparent;
+  white-space:nowrap;
+}
+.side-foot a svg{
+  flex:none;
+  color:#00F0FF;
+  transition:.2s;
+}
+.side-foot a:hover{
+  color:#FFFFFF;
+  background:rgba(0,229,255,.14);
+  border-color:rgba(0,229,255,.25);
+  box-shadow:0 0 14px rgba(0,229,255,.2);
+}
+.side-foot a:hover svg{
+  color:#FFFFFF;
+  transform:scale(1.1);
+}
 
 .main{flex:1;min-width:0;display:flex;flex-direction:column;background:#070D1A}
 .top{height:var(--top-h);display:flex;align-items:center;gap:var(--sp-4);padding-inline:clamp(1rem,3vw,1.9rem);

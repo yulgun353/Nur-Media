@@ -53,42 +53,40 @@
           '<span class="auth-capsule-divider"></span>' +
           '<span class="auth-capsule-tag"><i class="badge-dot"></i> ' + esc(a("brand") || "باشقۇرۇش سۇپىسى") + '</span>' +
         '</div>' +
-        '<div class="auth-card-frame">' +
-          '<form class="auth-card" id="loginForm" novalidate>' +
-            '<div class="auth-avatar-box">' +
-              '<div class="auth-avatar-circle">' +
-                icon("user", 34, "auth-avatar-svg") +
+        '<form class="auth-card" id="loginForm" autocomplete="off" novalidate>' +
+          '<div class="auth-card-h">' +
+            '<div class="auth-avatar-glow">' +
+              icon("user", 34, "auth-avatar-svg") +
+            '</div>' +
+          '</div>' +
+          '<div class="auth-err" id="authErr" role="alert" aria-live="polite">' +
+            icon("close", 16) +
+            '<span></span>' +
+          '</div>' +
+          '<div class="auth-fields">' +
+            '<div class="auth-field">' +
+              '<label for="authEmail">' + esc(a("login.email")) + '</label>' +
+              '<div class="auth-input-pill">' +
+                '<span class="auth-input-ic">' + icon("mail", 18) + '</span>' +
+                '<input id="authEmail" name="email" type="email" value="" autocomplete="off" required placeholder="admin@nurmedia.co">' +
               '</div>' +
             '</div>' +
-            '<div class="auth-err" id="authErr" role="alert" aria-live="polite">' +
-              icon("close", 16) +
-              '<span></span>' +
-            '</div>' +
-            '<div class="auth-fields">' +
-              '<div class="auth-field">' +
-                '<label for="authEmail">' + esc(a("login.email")) + '</label>' +
-                '<div class="auth-input-pill">' +
-                  '<span class="auth-input-ic">' + icon("mail", 18) + '</span>' +
-                  '<input id="authEmail" name="email" type="email" value="" autocomplete="off" required placeholder="admin@nurmedia.co">' +
-                '</div>' +
-              '</div>' +
-              '<div class="auth-field">' +
-                '<label for="authPass">' + esc(a("login.pass")) + '</label>' +
-                '<div class="auth-input-pill">' +
-                  '<span class="auth-input-ic">' + icon("lock", 18) + '</span>' +
-                  '<input id="authPass" name="pass" type="password" value="" autocomplete="new-password" required placeholder="••••••••">' +
-                  '<button type="button" class="auth-pass-toggle" id="togglePass" aria-label="Toggle password visibility">' +
-                    '<span class="pass-show">' + icon("eye", 17) + '</span>' +
-                    '<span class="pass-hide" hidden>' + icon("eyeOff", 17) + '</span>' +
-                  '</button>' +
-                '</div>' +
+            '<div class="auth-field">' +
+              '<label for="authPass">' + esc(a("login.pass")) + '</label>' +
+              '<div class="auth-input-pill">' +
+                '<span class="auth-input-ic">' + icon("lock", 18) + '</span>' +
+                '<input id="authPass" name="pass" type="password" value="" autocomplete="new-password" readonly onfocus="this.removeAttribute(\'readonly\');" required placeholder="••••••••">' +
+                '<button type="button" class="auth-pass-toggle" id="togglePass" aria-label="Toggle password visibility">' +
+                  '<span class="pass-show">' + icon("eye", 17) + '</span>' +
+                  '<span class="pass-hide" hidden>' + icon("eyeOff", 17) + '</span>' +
+                '</button>' +
               '</div>' +
             '</div>' +
-            '<button type="submit" class="btn auth-btn-submit" id="authSubmit">' +
-              '<span>' + esc(a("login.submit")) + '</span>' +
-            '</button>' +
-          '</form>' +
-        '</div>' +
+          '</div>' +
+          '<button type="submit" class="btn auth-btn-submit" id="authSubmit">' +
+            '<span>' + esc(a("login.submit")) + '</span>' +
+          '</button>' +
+        '</form>' +
       '</div>' +
     '</div>';
   }
@@ -105,9 +103,18 @@
     if (!f) return;
     UI.reveal();
 
+    // Prevent browser password autofill / prefill
+    var passInput = document.getElementById("authPass");
+    function clearFields() {
+      if (passInput) passInput.value = "";
+    }
+    clearFields();
+    setTimeout(clearFields, 50);
+    setTimeout(clearFields, 200);
+    setTimeout(clearFields, 500);
+
     // Toggle password visibility
     var toggleBtn = document.getElementById("togglePass");
-    var passInput = document.getElementById("authPass");
     if (toggleBtn && passInput) {
       toggleBtn.addEventListener("click", function (e) {
         e.preventDefault();
