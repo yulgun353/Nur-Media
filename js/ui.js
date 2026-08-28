@@ -150,7 +150,7 @@
       '<div class="hdr-act">' + modeBtn() + themeBtn() + langSwitch() +
       '<a class="btn btn-primary btn-sm hdr-cta" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + "</a>" +
       '<button type="button" class="burger" id="burger" aria-label="' + esc(t("a11y.openMenu")) + '" aria-expanded="false" aria-controls="nav">' +
-      '<span></span><span></span><span></span></button>' +
+      icon("menu", 20) + '</button>' +
       "</div></div></header>" +
       '<nav class="nav-drawer" id="nav" aria-label="Mobile Navigation">' +
       '<div class="nav-drawer-h">' +

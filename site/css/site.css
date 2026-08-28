@@ -377,12 +377,8 @@ html[data-mode="light"] .hero{
 html[data-mode="light"] .ftr{background:#231B20;color:#F8FAFC}
 html[data-mode="light"] .ftr h1,html[data-mode="light"] .ftr h2,html[data-mode="light"] .ftr h3,html[data-mode="light"] .ftr h4{color:#FFFFFF}
 
-/* burger */
-.burger{display:none;flex-direction:column;gap:5px;background:rgba(15,29,54,.8);border:1px solid rgba(0,229,255,.25);padding:.55rem;border-radius:50%;cursor:pointer}
-.burger span{display:block;width:22px;height:2px;background:#00E5FF;border-radius:2px;transition:.28s var(--ease)}
-.nav.is-open ~ .hdr-act .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav.is-open ~ .hdr-act .burger span:nth-child(2){opacity:0}
-.nav.is-open ~ .hdr-act .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* burger on desktop */
+.burger{display:none}
 .navscrim{position:fixed;inset:0;background:rgba(3,7,18,.7);z-index:80;backdrop-filter:blur(4px)}
 
 /* ---------- page backgrounds & structure ---------- */
@@ -1030,8 +1026,15 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
 
   /* Burger button on the far RIGHT edge */
   .burger{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
     order:10;
     margin-inline-start:auto;
+  }
+  .burger svg{
+    width:20px !important;
+    height:20px !important;
   }
   html[dir="rtl"] .burger{
     order:-1;
