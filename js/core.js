@@ -287,7 +287,7 @@
 
   /* ---------- auth & credentials management ---------- */
   var AUTH_KEY = "nurmedia.auth.creds";
-  var DEFAULT_CREDS = { email: "admin@nurmedia.co", pass: "112233" };
+  var DEFAULT_CREDS = { email: "admin@nurmedia.co", pass: "001122" };
 
   function getAuth() {
     var raw = sGet(AUTH_KEY);
@@ -301,7 +301,7 @@
   }
 
   function setAuth(email, pass) {
-    var creds = { email: String(email).trim().toLowerCase(), pass: String(pass) };
+    var creds = { email: String(email).trim().toLowerCase(), pass: String(pass).trim() };
     sSet(AUTH_KEY, JSON.stringify(creds));
     return creds;
   }
@@ -310,7 +310,7 @@
     var cur = getAuth();
     var p = String(pass || "").trim();
     if (!p) return false;
-    return (p === cur.pass) || (p === "112233") || (p === "nur2026");
+    return p === cur.pass;
   }
 
   function resetAuth() {
