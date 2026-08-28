@@ -120,6 +120,25 @@ html[dir="rtl"] .lnk:hover svg{transform:scaleX(-1) translateX(3px)}
   background:linear-gradient(120deg,rgba(0,229,255,.08),transparent 30%,transparent 70%,rgba(0,114,255,.08));
 }
 
+.hdr-brand{display:inline-flex;align-items:center;gap:.75rem;position:relative;z-index:2}
+.hdr-admin-btn{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.32rem .75rem;
+  border-radius:var(--r-pill,999px);background:rgba(0,229,255,.1);
+  border:1px solid rgba(0,229,255,.28);color:#00F0FF;font-size:0.75rem;
+  font-weight:700;text-decoration:none;transition:.22s var(--ease);
+  box-shadow:0 0 12px rgba(0,229,255,.15);white-space:nowrap;
+}
+.hdr-admin-btn:hover{
+  background:rgba(0,229,255,.22);color:#FFFFFF;border-color:#00F0FF;
+  box-shadow:0 0 18px rgba(0,229,255,.45);transform:translateY(-1px);
+}
+@media (max-width:640px){
+  .hdr-admin-btn span{display:none}
+  .hdr-admin-btn{padding:.42rem;width:34px;height:34px;justify-content:center;border-radius:50%}
+}
+html[data-mode="light"] .hdr-admin-btn{background:#FFFDF9;border-color:rgba(215,190,170,.6);color:#2C2227;box-shadow:0 2px 8px rgba(170,140,120,.12)}
+html[data-mode="light"] .hdr-admin-btn:hover{background:#FFFFFF;border-color:var(--c-theme,#0284C7);color:var(--c-theme,#0284C7)}
+
 .logo{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.7rem;font-family:var(--font-head);font-weight:700;font-size:var(--fs-md);letter-spacing:-.01em}
 html[lang="ug"] .logo,html[lang="ar"] .logo{font-size:var(--fs-lg);line-height:1.3}
 .logo-mark{display:inline-flex;width:40px;height:40px;border-radius:13px;overflow:hidden;box-shadow:0 0 18px rgba(0,229,255,.35);transition:.3s var(--ease)}

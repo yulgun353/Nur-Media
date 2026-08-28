@@ -140,7 +140,12 @@
 
     return '<a class="skip" href="#main">' + esc(t("a11y.skip")) + "</a>" +
       '<header class="hdr" id="hdr"><div class="wrap hdr-in">' +
-      logo(false) +
+      '<div class="hdr-brand">' +
+        logo(false) +
+        '<a class="hdr-admin-btn" href="' + N.href("admin.html") + '" aria-label="' + esc(t("footer.admin")) + '">' +
+          icon("layers", 15) + '<span>' + esc(t("footer.admin")) + '</span>' +
+        '</a>' +
+      '</div>' +
       '<nav class="nav-desktop" aria-label="Main"><ul>' + desktopLinks + "</ul></nav>" +
       '<div class="hdr-act">' + modeBtn() + themeBtn() + langSwitch() +
       '<a class="btn btn-primary btn-sm hdr-cta" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + "</a>" +
