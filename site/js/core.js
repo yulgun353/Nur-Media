@@ -273,7 +273,7 @@
     return found ? Math.round((filled / found) * 100) : 100;
   }
 
-  /* ---------- leads (public form -> dashboard inbox) ---------- */
+  /* ---------- leads (public form -> dashboard inbox + Supabase cloud) ---------- */
   function addLead(lead) {
     var c = loadContent();
     c.leads = c.leads || [];
@@ -282,6 +282,12 @@
     lead.status = "new";
     c.leads.unshift(lead);
     saveContent();
+
+    // Async sync to Supabase Cloud
+    if (window.NUR && window.NUR.supabase && typeof window.NUR.supabase.sendLead === "function") {
+      window.NUR.supabase.sendLead(lead);
+    }
+
     return lead;
   }
 

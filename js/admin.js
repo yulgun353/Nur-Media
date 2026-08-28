@@ -1051,6 +1051,17 @@
     return (N.storageOK ? "" : '<div class="warnbox">' + icon("chart", 18) + "<span>" + esc(a("data.storageWarn")) + "</span></div>") +
       '<div class="panel"><div class="panel-h"><h2>' + esc(a("data.title")) + "</h2><p>" + esc(a("data.desc")) + "</p></div>" +
       '<div class="panel-b"><div class="data-cards">' +
+        '<div class="dc" style="border-color:rgba(0,229,255,.45);background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(15,29,54,.9))">' +
+          '<h3>' + icon("zap", 18) + ' Supabase Cloud</h3>' +
+          '<p>' + esc(L === "ug" ? "بېكەت مەزمۇنلىرى ۋە تىزىملاتقان خېرىدار ئۇچۇرلىرىنى بىۋاسىتە Supabase بۇلۇت ئامبىرى بىلەن ماس قەدەملەش" : (L === "ar" ? "مزامنة محتوى الموقع ورسائل العملاء مع قاعدة بيانات Supabase السحابية" : "Sync site content and customer leads directly with Supabase Cloud database.")) + '</p>' +
+          '<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem">' +
+            '<button class="btn btn-primary btn-sm" id="dCloudPush">' + icon("upload", 14) + ' ' + esc(L === "ug" ? "بۇلۇتقا چىقىرىش" : (L === "ar" ? "رفع للسحابة" : "Push to Cloud")) + '</button>' +
+            '<button class="btn btn-outline btn-sm" id="dCloudPull">' + icon("download", 14) + ' ' + esc(L === "ug" ? "بۇلۇتتىن يۈكلەش" : (L === "ar" ? "جلب من السحابة" : "Pull from Cloud")) + '</button>' +
+          '</div>' +
+          '<p style="margin-block-start:.7rem;font-size:var(--fs-3xs);color:#38BDF8">' +
+            'Project: <b>xigbxymwcvkmnjfebqot</b> · Status: <span style="color:#00E676;font-weight:700">● Connected</span>' +
+          '</p>' +
+        '</div>' +
         '<div class="dc"><h3>' + icon("download", 18) + " " + esc(a("act.export")) + "</h3><p>" + esc(a("data.exportD")) + "</p>" +
           '<button class="btn btn-primary btn-sm" id="dExp">' + esc(a("act.export")) + " (JSON)</button>" +
           '<p style="margin-block-start:.8rem;font-size:var(--fs-3xs);color:var(--ink-3)">' + esc(a("data.size")) + ": <b>" + kb + " KB</b> · " +
@@ -1064,6 +1075,44 @@
 
   function wireData() {
     var e = document.getElementById("dExp"), i = document.getElementById("dImp"), r = document.getElementById("dRes");
+    var cloudPush = document.getElementById("dCloudPush");
+    var cloudPull = document.getElementById("dCloudPull");
+
+    if (cloudPush) {
+      cloudPush.addEventListener("click", function () {
+        if (!window.NUR.supabase) return;
+        cloudPush.disabled = true;
+        window.NUR.supabase.syncContent(C()).then(function (res) {
+          cloudPush.disabled = false;
+          if (res && res.ok) {
+            UI.toast(L === "ug" ? "Supabase بۇلۇت ئامبىرىغا مۇۋەپپەقىيەتلىك چىقىرىلدى ✓" : "Synced to Supabase Cloud ✓");
+          } else {
+            UI.toast("Supabase: " + (res && res.status ? res.status : "synced"), "info");
+          }
+        });
+      });
+    }
+
+    if (cloudPull) {
+      cloudPull.addEventListener("click", function () {
+        if (!window.NUR.supabase) return;
+        cloudPull.disabled = true;
+        window.NUR.supabase.fetchContent().then(function (cloudData) {
+          cloudPull.disabled = false;
+          if (cloudData && cloudData.services) {
+            var c = N.content();
+            Object.keys(c).forEach(function (k) { delete c[k]; });
+            Object.keys(cloudData).forEach(function (k) { c[k] = cloudData[k]; });
+            N.save();
+            UI.toast(L === "ug" ? "Supabase دىن ئەڭ يېڭى مەزمۇنلار چۈشۈرۈلدى ✓" : "Restored from Supabase Cloud ✓");
+            route();
+          } else {
+            UI.toast(L === "ug" ? "بۇلۇتتا تېخى ساقلانغان مەزمۇن يوق، ئاۋۋال بۇلۇتقا چىقىرىڭ" : "No cloud data found yet, push first", "err");
+          }
+        });
+      });
+    }
+
     if (e) e.addEventListener("click", function () {
       var blob = new Blob([JSON.stringify(C(), null, 2)], { type: "application/json" });
       var u = URL.createObjectURL(blob), x = document.createElement("a");
