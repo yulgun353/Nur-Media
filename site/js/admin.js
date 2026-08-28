@@ -1014,8 +1014,10 @@
       return "<tr><td><code>" + esc(r.g + "." + r.k) + "</code></td>" + cells + "</tr>";
     }).join("");
     return '<div class="panel"><div class="panel-h"><h2>' + esc(a("translate.title")) + "</h2><p>" + esc(a("translate.desc")) + "</p>" +
-      '<div class="panel-r"><button class="btn btn-primary btn-sm" id="trSave">' + icon("check", 15) + esc(a("act.save")) + "</button>" +
-      '<button class="icon-btn" id="trReset">' + esc(a("act.reset")) + "</button></div></div>" +
+      '<div class="panel-r">' +
+        '<button class="btn btn-outline btn-sm" id="trReset">' + icon("undo", 15) + '<span>' + esc(a("act.reset")) + '</span></button>' +
+        '<button class="btn btn-primary btn-sm" id="trSave">' + icon("check", 15) + '<span>' + esc(a("act.save")) + '</span></button>' +
+      '</div></div>' +
       '<div class="tbl-wrap"><table class="tbl tr-table"><thead><tr><th>Key</th>' +
       N.LANGS.map(function (l) { return "<th>" + esc(a("fld." + l)) + "</th>"; }).join("") + "</tr></thead><tbody>" + body + "</tbody></table></div></div>";
   }

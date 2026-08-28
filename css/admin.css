@@ -523,8 +523,34 @@ html[dir="rtl"].langsw.is-open .ls-chev{transform:scaleX(-1) rotate(90deg)}
   filter:brightness(1.06);
 }
 .btn-primary:active{transform:translateY(0)}
+.btn-outline{
+  background:rgba(15,29,54,.8);
+  border:1.5px solid rgba(0,229,255,.35);
+  color:#00F0FF;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+}
+.btn-outline:hover{
+  background:rgba(0,229,255,.15);
+  border-color:#00F0FF;
+  color:#FFFFFF;
+  box-shadow:0 0 20px rgba(0,229,255,.4);
+  transform:translateY(-2px);
+}
+.btn-danger{
+  background:linear-gradient(135deg,rgba(244,63,94,.22),rgba(239,68,68,.25));
+  border:1.5px solid rgba(244,63,94,.45);
+  color:#FB7185;
+  box-shadow:0 4px 16px rgba(244,63,94,.2);
+}
+.btn-danger:hover{
+  background:linear-gradient(135deg,rgba(244,63,94,.4),rgba(239,68,68,.4));
+  border-color:#FB7185;
+  color:#FFFFFF;
+  box-shadow:0 0 22px rgba(244,63,94,.45);
+  transform:translateY(-2px);
+}
 .btn-block{width:100%}
-.btn-sm{padding:.52rem 1.1rem;font-size:var(--fs-xs, .875rem)}
+.btn-sm{padding:.52rem 1.1rem;font-size:var(--fs-xs, .875rem);border-radius:var(--r-pill, 999px)}
 
 /* Forms Base */
 label{display:block;font-size:var(--fs-xs, .875rem);font-weight:700;color:#CBD5E1}
