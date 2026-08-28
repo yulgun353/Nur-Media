@@ -107,8 +107,8 @@
         (l === N.lang ? icon("check", 15, "ls-check") : "") + "</button></li>";
     }).join("");
     return '<div class="langsw' + (variant ? " " + variant : "") + '">' +
-      '<button type="button" class="langsw-btn" data-langbtn aria-haspopup="true" aria-expanded="false">' +
-      icon("globe", 17) + '<span>' + N.LANG_SHORT[N.lang] + "</span>" + icon("chevron", 14, "ls-chev") + "</button>" +
+      '<button type="button" class="langsw-btn" data-langbtn aria-haspopup="true" aria-expanded="false" aria-label="Language">' +
+      icon("globe", 18, "lang-ic") + "</button>" +
       '<ul class="langsw-menu" data-langmenu role="menu">' + items + "</ul></div>";
   }
 
@@ -143,7 +143,7 @@
       '<div class="hdr-brand">' +
         logo(false) +
         '<a class="hdr-admin-btn" href="' + N.href("admin.html") + '" aria-label="' + esc(t("footer.admin")) + '">' +
-          icon("layers", 15) + '<span>' + esc(t("footer.admin")) + '</span>' +
+          icon("layers", 18) +
         '</a>' +
       '</div>' +
       '<nav class="nav-desktop" aria-label="Main"><ul>' + desktopLinks + "</ul></nav>" +

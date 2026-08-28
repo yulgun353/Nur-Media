@@ -167,50 +167,142 @@ html[lang="ug"] .logo,html[lang="ar"] .logo{font-size:var(--fs-lg);line-height:1
 .hdr-act{display:flex;align-items:center;gap:.65rem;margin-inline-start:auto;position:relative;z-index:1}
 .nav-desktop + .hdr-act{margin-inline-start:0}
 
-/* ---------- Mode (Day/Night) & Theme (4 Colors) 1-Click Buttons ---------- */
-.mode-btn, .theme-btn{
-  position:relative;display:inline-flex;align-items:center;justify-content:center;
-  background:rgba(15,29,54,.85);border:1px solid var(--line-2);
-  border-radius:var(--r-pill);width:38px;height:38px;padding:0;cursor:pointer;
-  color:var(--c-theme,#00F0FF);transition:.22s var(--ease);
-  box-shadow:0 4px 12px rgba(0,0,0,.25);flex:none;
+/* ============================================================
+   HEADER SQUIRCLE ACTION BUTTONS (Logo-like dynamic multi-colored boxes)
+   ============================================================ */
+.mode-btn, .theme-btn, .langsw-btn, .hdr-admin-btn, .burger{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border-radius:13px; /* Identical squircle to logo-mark */
+  cursor:pointer;
+  transition:.25s cubic-bezier(.22,.61,.36,1);
+  flex:none;
+  text-decoration:none;
+  overflow:hidden;
 }
-.mode-btn:hover, .theme-btn:hover{
-  border-color:var(--c-theme,#00F0FF);color:#FFFFFF;
-  box-shadow:0 0 16px var(--c-theme,#00F0FF);
-  background:rgba(0,229,255,.18);transform:scale(1.08);
+
+/* 1. Mode Button (🌙/☀️): Golden Amber Sunset */
+.mode-btn{
+  background:linear-gradient(135deg, rgba(245,158,11,.22), rgba(239,68,68,.18));
+  border:1.5px solid rgba(245,158,11,.45);
+  color:#FBBF24;
+  box-shadow:0 0 16px rgba(245,158,11,.25), 0 4px 12px rgba(0,0,0,.3);
 }
-.mode-btn:active, .theme-btn:active{transform:scale(0.94)}
+.mode-btn:hover{
+  background:linear-gradient(135deg, rgba(245,158,11,.38), rgba(239,68,68,.3));
+  border-color:#FBBF24;
+  color:#FFFFFF;
+  box-shadow:0 0 24px rgba(245,158,11,.55);
+  transform:translateY(-2px) scale(1.06);
+}
+
+/* 2. Theme Button (🎨): Cyber Magenta & Violet */
+.theme-btn{
+  background:linear-gradient(135deg, rgba(217,70,239,.22), rgba(139,92,246,.22));
+  border:1.5px solid rgba(217,70,239,.45);
+  color:#E879F9;
+  box-shadow:0 0 16px rgba(217,70,239,.25), 0 4px 12px rgba(0,0,0,.3);
+}
+.theme-btn:hover{
+  background:linear-gradient(135deg, rgba(217,70,239,.38), rgba(139,92,246,.32));
+  border-color:#E879F9;
+  color:#FFFFFF;
+  box-shadow:0 0 24px rgba(217,70,239,.55);
+  transform:translateY(-2px) scale(1.06);
+}
 .theme-dot{
-  position:absolute;inset-block-end:5px;inset-inline-end:5px;
-  width:8px;height:8px;border-radius:50%;
-  border:1.5px solid #070D1A;box-shadow:0 0 6px currentColor;
+  position:absolute;inset-block-end:4px;inset-inline-end:4px;
+  width:7px;height:7px;border-radius:50%;
+  border:1.5px solid #070D1A;box-shadow:0 0 8px currentColor;
   transition:.25s ease;
 }
 
-/* language switcher */
+/* 3. Language Button (🌐): Emerald & Aquamarine */
 .langsw{position:relative}
 .langsw-btn{
-  display:inline-flex;align-items:center;gap:.4rem;
-  background:rgba(15,29,54,.85);border:1px solid var(--line-2);
-  border-radius:var(--r-pill);padding:.42rem .8rem;cursor:pointer;
-  font-size:var(--fs-xs);font-weight:700;color:var(--ink);transition:.2s;
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  background:linear-gradient(135deg, rgba(16,185,129,.22), rgba(6,182,212,.22));
+  border:1.5px solid rgba(16,185,129,.45);
+  color:#34D399;
+  box-shadow:0 0 16px rgba(16,185,129,.25), 0 4px 12px rgba(0,0,0,.3);
 }
 .langsw-btn:hover{
-  border-color:var(--c-theme,#00F0FF);color:var(--c-theme,#00F0FF);
-  box-shadow:0 0 16px var(--c-theme,#00F0FF);
-  background:rgba(0,229,255,.12);
+  background:linear-gradient(135deg, rgba(16,185,129,.38), rgba(6,182,212,.32));
+  border-color:#34D399;
+  color:#FFFFFF;
+  box-shadow:0 0 24px rgba(16,185,129,.55);
+  transform:translateY(-2px) scale(1.06);
 }
+
+/* 4. Admin Button (❖ Layers): Crimson & Coral Rose */
+.hdr-admin-btn{
+  background:linear-gradient(135deg, rgba(244,63,94,.22), rgba(251,146,60,.22));
+  border:1.5px solid rgba(244,63,94,.45);
+  color:#FB7185;
+  box-shadow:0 0 16px rgba(244,63,94,.25), 0 4px 12px rgba(0,0,0,.3);
+}
+.hdr-admin-btn:hover{
+  background:linear-gradient(135deg, rgba(244,63,94,.38), rgba(251,146,60,.32));
+  border-color:#FB7185;
+  color:#FFFFFF;
+  box-shadow:0 0 24px rgba(244,63,94,.55);
+  transform:translateY(-2px) scale(1.06);
+}
+
+/* 5. Burger Button (☰): Electric Cyan & Royal Blue */
+.burger{
+  background:linear-gradient(135deg, rgba(0,229,255,.22), rgba(0,114,255,.22));
+  border:1.5px solid rgba(0,229,255,.45);
+  color:#00F0FF;
+  box-shadow:0 0 16px rgba(0,229,255,.25), 0 4px 12px rgba(0,0,0,.3);
+}
+.burger:hover{
+  background:linear-gradient(135deg, rgba(0,229,255,.38), rgba(0,114,255,.32));
+  border-color:#00F0FF;
+  color:#FFFFFF;
+  box-shadow:0 0 24px rgba(0,229,255,.55);
+  transform:translateY(-2px) scale(1.06);
+}
+
+.mode-btn:active, .theme-btn:active, .langsw-btn:active, .hdr-admin-btn:active, .burger:active{
+  transform:scale(0.92);
+}
+
+/* Light mode button styles */
+html[data-mode="light"] .mode-btn{
+  background:linear-gradient(135deg, rgba(245,158,11,.15), rgba(239,68,68,.1));
+  border-color:rgba(245,158,11,.4);color:#D97706;box-shadow:0 2px 10px rgba(245,158,11,.15);
+}
+html[data-mode="light"] .theme-btn{
+  background:linear-gradient(135deg, rgba(217,70,239,.15), rgba(139,92,246,.1));
+  border-color:rgba(217,70,239,.4);color:#C026D3;box-shadow:0 2px 10px rgba(217,70,239,.15);
+}
+html[data-mode="light"] .langsw-btn{
+  background:linear-gradient(135deg, rgba(16,185,129,.15), rgba(6,182,212,.1));
+  border-color:rgba(16,185,129,.4);color:#059669;box-shadow:0 2px 10px rgba(16,185,129,.15);
+}
+html[data-mode="light"] .hdr-admin-btn{
+  background:linear-gradient(135deg, rgba(244,63,94,.15), rgba(251,146,60,.1));
+  border-color:rgba(244,63,94,.4);color:#E11D48;box-shadow:0 2px 10px rgba(244,63,94,.15);
+}
+html[data-mode="light"] .burger{
+  background:linear-gradient(135deg, rgba(2,132,199,.15), rgba(79,70,229,.1));
+  border-color:rgba(2,132,199,.4);color:#0284C7;box-shadow:0 2px 10px rgba(2,132,199,.15);
+}
+
 .ls-chev{transition:transform .25s var(--ease)}
 .langsw.is-open .ls-chev{transform:rotate(90deg)}
 html[dir="rtl"] .ls-chev{transform:scaleX(-1)}
 html[dir="rtl"].langsw.is-open .ls-chev{transform:scaleX(-1) rotate(90deg)}
 
 .langsw-menu{
-  position:absolute;top:calc(100% + 10px);inset-inline-end:0;min-width:200px;
-  background:var(--bg-alt,#0D1B33);border:1px solid var(--line-2);border-radius:14px;
-  box-shadow:0 20px 60px rgba(0,0,0,.85),0 0 25px rgba(0,229,255,.15);
+  position:absolute;top:calc(100% + 10px);inset-inline-end:0;min-width:180px;
+  background:var(--bg-alt,#0D1B33);border:1.5px solid rgba(16,185,129,.4);border-radius:14px;
+  box-shadow:0 20px 60px rgba(0,0,0,.85),0 0 25px rgba(16,185,129,.2);
   padding:.45rem;opacity:0;visibility:hidden;transform:translateY(-6px);
   transition:.2s var(--ease);z-index:100;backdrop-filter:blur(16px);
 }
@@ -931,24 +1023,13 @@ html[dir="rtl"] .wd-img img{border-start-start-radius:0;border-end-start-radius:
   .logo-text{font-size:0.95rem}
   .hdr-cta{display:none}
   .hdr-act{gap:0.35rem;display:flex;align-items:center}
-  .mode-btn, .theme-btn{width:34px;height:34px}
-  .langsw-btn{padding:0.35rem 0.55rem;font-size:0.75rem}
+  .mode-btn, .theme-btn, .langsw-btn, .hdr-admin-btn, .burger{width:36px;height:36px;border-radius:11px;padding:0}
 
   /* Desktop nav hidden on mobile */
   .nav-desktop{display:none !important}
 
   /* Burger button on the far RIGHT edge */
   .burger{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    background:rgba(15,29,54,.85);
-    border:1px solid rgba(0,229,255,.28);
-    cursor:pointer;
-    flex:none;
     order:10;
     margin-inline-start:auto;
   }
