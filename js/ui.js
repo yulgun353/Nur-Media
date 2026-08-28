@@ -114,20 +114,34 @@
 
   /* ---------------- header ---------------- */
   function header(active) {
-    var nav = ["home", "about", "services", "work", "blog", "contact"];
-    var files = { home: "index.html", about: "about.html", services: "services.html", work: "work.html", blog: "blog.html", contact: "contact.html" };
-    var links = nav.map(function (k) {
-      return '<li><a href="' + N.href(files[k]) + '"' + (active === k ? ' class="is-on" aria-current="page"' : "") + ">" + esc(t("nav." + k)) + "</a></li>";
+    var nav = [
+      { key: "home", file: "index.html", ic: "spark" },
+      { key: "about", file: "about.html", ic: "users" },
+      { key: "services", file: "services.html", ic: "zap" },
+      { key: "work", file: "work.html", ic: "layers" },
+      { key: "blog", file: "blog.html", ic: "doc" },
+      { key: "contact", file: "contact.html", ic: "phone" }
+    ];
+    var links = nav.map(function (item) {
+      var isCur = active === item.key;
+      return '<li><a href="' + N.href(item.file) + '"' + (isCur ? ' class="is-on" aria-current="page"' : "") + ">" +
+        icon(item.ic, 18, "nav-link-ic") +
+        '<span class="nav-link-txt">' + esc(t("nav." + item.key)) + "</span>" +
+        (isCur ? icon("check", 14, "nav-link-chk") : "") +
+        "</a></li>";
     }).join("");
 
     return '<a class="skip" href="#main">' + esc(t("a11y.skip")) + "</a>" +
       '<header class="hdr" id="hdr"><div class="wrap hdr-in">' +
       logo(false) +
       '<nav class="nav" id="nav" aria-label="Main">' +
-      '<div class="nav-drawer-h">' + logo(false) + '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button></div>' +
-      '<ul>' + links + "</ul>" +
+      '<div class="nav-drawer-h">' +
+        logo(false) +
+        '<button type="button" class="nav-close" id="navClose" aria-label="Close">' + icon("close", 20) + '</button>' +
+      '</div>' +
+      '<ul class="nav-links">' + links + "</ul>" +
       '<div class="nav-drawer-f">' +
-      '<a class="btn btn-primary btn-block" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + '</a>' +
+        '<a class="btn btn-primary btn-block" href="' + N.href("contact.html") + '">' + esc(t("cta.start")) + icon("arrow", 16) + '</a>' +
       '</div>' +
       "</nav>" +
       '<div class="hdr-act">' + modeBtn() + themeBtn() + langSwitch() +
