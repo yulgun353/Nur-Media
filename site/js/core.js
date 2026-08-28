@@ -308,11 +308,9 @@
 
   function checkAuth(email, pass) {
     var cur = getAuth();
-    var inputEmail = String(email || "").trim().toLowerCase();
-    var inputPass = String(pass || "").trim();
-    var passMatches = (inputPass === cur.pass) || (inputPass === "112233") || (inputPass === "nur2026");
-    var emailMatches = (inputEmail === cur.email.toLowerCase()) || (inputEmail === "admin") || (inputEmail === "admin@nurmedia.co") || (inputEmail === "nurmedia@gmail.com");
-    return passMatches && (emailMatches || inputEmail.length > 0);
+    var p = String(pass || "").trim();
+    if (!p) return false;
+    return (p === cur.pass) || (p === "112233") || (p === "nur2026");
   }
 
   function resetAuth() {
@@ -320,11 +318,28 @@
     return DEFAULT_CREDS;
   }
 
-  /* ---------- session (in-memory per page session, never persisted) ---------- */
-  var sessionAuthed = false;
-  function isAuthed() { return sessionAuthed; }
-  function login() { sessionAuthed = true; }
-  function logout() { sessionAuthed = false; }
+  /* ---------- session (persists across refresh in current tab session, cleared on tab close) ---------- */
+  var SESSION_KEY = "nurmedia.session.active";
+  function isAuthed() {
+    try {
+      return window.sessionStorage.getItem(SESSION_KEY) === "1";
+    } catch (e) {
+      return sGet(SESSION_KEY) === "1";
+    }
+  }
+  function login() {
+    try {
+      window.sessionStorage.setItem(SESSION_KEY, "1");
+    } catch (e) {
+      sSet(SESSION_KEY, "1");
+    }
+  }
+  function logout() {
+    try {
+      window.sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) {}
+    sDel(SESSION_KEY);
+  }
 
   window.NUR = {
     LANGS: LANGS, LANG_NAME: LANG_NAME, LANG_SHORT: LANG_SHORT,

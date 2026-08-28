@@ -68,14 +68,14 @@
               '<label for="authEmail">' + esc(a("login.email")) + '</label>' +
               '<div class="auth-input-pill">' +
                 '<span class="auth-input-ic">' + icon("mail", 18) + '</span>' +
-                '<input id="authEmail" name="email" type="email" value="" autocomplete="off" required placeholder="admin@nurmedia.co">' +
+                '<input id="authEmail" name="email" type="text" value="admin@nurmedia.co" autocomplete="username" required placeholder="admin@nurmedia.co">' +
               '</div>' +
             '</div>' +
             '<div class="auth-field">' +
               '<label for="authPass">' + esc(a("login.pass")) + '</label>' +
               '<div class="auth-input-pill">' +
                 '<span class="auth-input-ic">' + icon("lock", 18) + '</span>' +
-                '<input id="authPass" name="pass" type="password" value="" autocomplete="new-password" readonly onfocus="this.removeAttribute(\'readonly\');" required placeholder="••••••••">' +
+                '<input id="authPass" name="pass" type="password" value="" autocomplete="current-password" required placeholder="••••••••">' +
                 '<button type="button" class="auth-pass-toggle" id="togglePass" aria-label="Toggle password visibility">' +
                   '<span class="pass-show">' + icon("eye", 17) + '</span>' +
                   '<span class="pass-hide" hidden>' + icon("eyeOff", 17) + '</span>' +
@@ -103,15 +103,8 @@
     if (!f) return;
     UI.reveal();
 
-    // Prevent browser password autofill / prefill
     var passInput = document.getElementById("authPass");
-    function clearFields() {
-      if (passInput) passInput.value = "";
-    }
-    clearFields();
-    setTimeout(clearFields, 50);
-    setTimeout(clearFields, 200);
-    setTimeout(clearFields, 500);
+    var emailInput = document.getElementById("authEmail");
 
     // Toggle password visibility
     var toggleBtn = document.getElementById("togglePass");
@@ -132,20 +125,14 @@
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var err = document.getElementById("authErr"), span = err.querySelector("span");
-      if (Date.now() < LOCKED) {
-        span.textContent = a("login.locked");
-        err.classList.add("is-on");
-        return;
-      }
-      var d = new FormData(f);
-      var ok = N.checkAuth(d.get("email"), d.get("pass"));
+      var emailVal = emailInput ? emailInput.value : "";
+      var passVal = passInput ? passInput.value : "";
+      var ok = N.checkAuth(emailVal, passVal);
       if (!ok) {
-        ATTEMPTS++;
-        if (ATTEMPTS >= 5) { LOCKED = Date.now() + 15000; ATTEMPTS = 0; }
         span.textContent = a("login.err");
         err.classList.add("is-on");
         err.classList.remove("shake");
-        void err.offsetWidth; // trigger reflow
+        void err.offsetWidth;
         err.classList.add("shake");
         return;
       }
